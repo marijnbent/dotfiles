@@ -15,4 +15,4 @@ export PATH="node_modules/.bin:vendor/bin:$PATH"
 # referenced in my aliases.zsh file directly.
 #export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 
-export PATH="/Users/brtdv/Library/Application Support/Herd/bin:$PATH"
+export PATH="/Users/marijn/Library/Application Support/Herd/bin:$PATH"

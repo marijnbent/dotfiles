@@ -1,5 +1,5 @@
 # Shortcuts
-alias reloadshell="source $HOME/.zshrc"
+alias reloadshell="source ~/.zshrc"
 alias reloaddns="dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
 alias ll="/opt/homebrew/opt/coreutils/libexec/gnubin/ls -AhlFo --color --group-directories-first"
 alias '..'="cd .."
