@@ -28,6 +28,7 @@ brew tap homebrew/bundle
 brew bundle --file ./Brewfile
 
 # Create a projects directories
+mkdir $HOME/Sites
 mkdir $HOME/Projects
 mkdir $HOME/Projects/wordproof
 
