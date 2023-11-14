@@ -1,15 +1,3 @@
-<p align="center"><img src="art/banner-2x.png"></p>
-
-## Introduction
-
-This repository serves as my way to help me setup and maintain my Mac. It takes the effort out of installing everything manually. Everything needed to install my preferred setup of macOS is detailed in this readme. Feel free to explore, learn and copy parts for your own dotfiles. Enjoy!
-
-📖 - [Read the blog post](https://driesvints.com/blog/getting-started-with-dotfiles)  
-📺 - [Watch the screencast on Laracasts](https://laracasts.com/series/guest-spotlight/episodes/1)  
-💡 - [Learn how to build your own dotfiles](https://github.com/driesvints/dotfiles#your-own-dotfiles)
-
-If you find this repo useful, [consider sponsoring me](https://github.com/sponsors/driesvints) (a little bit)! ❤️ 
-
 ## A Fresh macOS Setup
 
 These instructions are for setting up new Mac devices. Instead, if you want to get started building your own dotfiles, you can [find those instructions below](#your-own-dotfiles).
@@ -33,7 +21,7 @@ After backing up your old Mac you may now follow these install instructions to s
 3. Clone this repo to `~/.dotfiles` with:
 
     ```zsh
-    git clone --recursive git@github.com:driesvints/dotfiles.git ~/.dotfiles
+    git clone --recursive git@github.com:marijnbent/dotfiles.git ~/.dotfiles
     ```
 
 4. Run the installation with:
@@ -45,6 +33,7 @@ After backing up your old Mac you may now follow these install instructions to s
 5. Start `Herd.app` and run its install process
 6. After mackup is synced with your cloud storage, restore preferences by running `mackup restore`
 7. Restart your computer to finalize the process
+8. Now, just login to all the different apps.
 
 Your Mac is now ready to use!
 
