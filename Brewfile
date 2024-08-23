@@ -15,6 +15,8 @@ brew 'httpie'
 brew 'mackup'
 brew 'mas' # Mac App Store manager
 brew 'pkg-config' # https://github.com/driesvints/dotfiles/issues/20
+brew 'pyenv'
+brew 'pipenv'
 brew 'svn' # Needed to install fonts
 brew 'speedtest'
 

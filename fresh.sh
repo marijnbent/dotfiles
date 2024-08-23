@@ -40,3 +40,7 @@ ln -s ./.mackup.cfg $HOME/.mackup.cfg
 
 # Set macOS preferences - we will run this last because this will reload the shell
 source ./.macos
+
+# Set Python using pyenv
+pyenv install 3.11
+pyenv global 3.11
