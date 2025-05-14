@@ -34,7 +34,13 @@ alias sflower='ssh forge@49.12.191.235'
 alias scloud='ssh marijn@34.90.95.253'
 alias scloud2='ssh marijn@34.32.132.164'
 
+alias sploi='ssh ploi@188.245.170.184'
+
+alias sradxa='ssh root@192.168.1.93'
+
 # Brew
 alias bi="brew info"
 alias bs="brew search"
-alias bc="brew install"
+alias ba="brew install"
+alias bac="brew --cask install"
+alias mysql="/opt/homebrew/opt/mysql@8.4/bin/mysql -u root"

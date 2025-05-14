@@ -16,3 +16,4 @@ export PATH="node_modules/.bin:vendor/bin:$PATH"/
 #export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 
 export PATH="/Users/marijn/Library/Application Support/Herd/bin:$PATH"
+

@@ -178,6 +178,12 @@ defaults write NSGlobalDomain AppleMetricUnits -bool true
 # Stop iTunes from responding to the keyboard media keys
 #launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
 
+# Disable default applications when a DVD/CD is inserted
+defaults write com.apple.digihub com.apple.digihub.cd.picture.appeared -dict action 1
+defaults write com.apple.digihub com.apple.digihub.dvd.video.appeared -dict action 1
+defaults write com.apple.digihub com.apple.digihub.cd.music.appeared -dict action 1
+
+
 ###############################################################################
 # Energy saving                                                               #
 ###############################################################################
