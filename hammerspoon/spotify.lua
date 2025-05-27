@@ -1,4 +1,4 @@
-print('Spotify module loaded')
+print('🎶 Spotify module loaded')
 
 local spotify_script = [[
     if application "Spotify" is running then
@@ -22,8 +22,8 @@ local playPauseWatcher = hs.eventtap.new({hs.eventtap.event.types.systemDefined}
     local systemKeyEvent = event:systemKey()
     if systemKeyEvent and systemKeyEvent.key == "PLAY" and systemKeyEvent.down then
         print("Play/Pause key pressed")
-        hs.spotify.playpause()
-        -- hs.osascript.applescript(spotify_script)
+        hs.osascript.applescript(spotify_script)
+        return true
     end
     return false
 end)

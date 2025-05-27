@@ -1,3 +1,5 @@
+print('🥁 Launcher loaded')
+
 spoon.LeftRightHotkey:bind({"rCmd"}, "s", function()
     hs.application.launchOrFocus("Spotify")
 end)
