@@ -5,6 +5,7 @@ alias ll="/opt/homebrew/opt/coreutils/libexec/gnubin/ls -AhlFo --color --group-d
 alias '..'="cd .."
 alias '...'="cd ../.."
 alias speed='speedtest'
+alias codi="code-insiders"
 
 # Directories
 alias dotfiles="code $DOTFILES"

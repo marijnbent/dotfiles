@@ -36,11 +36,8 @@ cask 'github'
 cask 'google-chrome'
 cask 'herd'
 cask 'imageoptim'
-cask 'ray'
 cask 'raycast'
-cask 'readdle-spark'
 cask 'the-unarchiver'
-cask 'tinkerwell'
 cask 'visual-studio-code'
 
 # Fonts
