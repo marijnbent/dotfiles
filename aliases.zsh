@@ -1,5 +1,9 @@
 # Shortcuts
 alias reloadshell="source ~/.zshrc"
+alias reloadhammer='hs -c "hs.reload()"'
+
+alias reload="reloadshell && reloadhammer"
+
 alias reloaddns="dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
 alias ll="/opt/homebrew/opt/coreutils/libexec/gnubin/ls -AhlFo --color --group-directories-first"
 alias '..'="cd .."
@@ -14,6 +18,7 @@ alias p="cd $HOME/Projects"
 alias w="cd $HOME/Projects/wordproof"
 alias s="cd $HOME/Sites"
 alias icloud="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/"
+alias notes="cd ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Notes"
 
 # Laravel
 alias a="php artisan"
@@ -44,4 +49,8 @@ alias bi="brew info"
 alias bs="brew search"
 alias ba="brew install"
 alias bac="brew --cask install"
+
 alias mysql="/opt/homebrew/opt/mysql@8.4/bin/mysql -u root"
+
+# File Operations
+copy() { cat "$1" | pbcopy; }
