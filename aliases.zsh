@@ -12,8 +12,7 @@ alias speed='speedtest'
 alias codi="code-insiders"
 
 # Directories
-alias dotfiles="code $DOTFILES"
-alias dot="code $DOTFILES"
+alias dot="cd $DOTFILES"
 alias p="cd $HOME/Projects"
 alias w="cd $HOME/Projects/wordproof"
 alias s="cd $HOME/Sites"
@@ -25,6 +24,12 @@ alias a="php artisan"
 alias am="php artisan migrate"
 alias ar="php artisan migrate:rollback"
 
+#AI
+alias cl="claude --dangerously-skip-permissions"
+alias co="codex"
+alias o="opencode"
+alias ag="cd $DOTFILES/agents"
+
 # Python
 alias py="python"
 
@@ -35,14 +40,14 @@ alias cfresh="rm -rf vendor/ composer.lock && composer i"
 alias dev="npm run dev"
 
 # SSH
-alias screatorscatalogue='ssh forge@31.220.103.36'
-alias sflower='ssh forge@49.12.191.235'
-alias scloud='ssh marijn@34.90.95.253'
-alias scloud2='ssh marijn@34.32.132.164'
-
-alias sploi='ssh ploi@188.245.170.184'
-
 alias sradxa='ssh root@192.168.1.93'
+
+alias ssh-netcup-amiable-shadow="ssh ploi@152.53.82.25"
+alias ssh-hetzner-gorgeous-flower="ssh ploi@128.140.5.136"
+alias ssh-hetzner-blushing-storm="ssh ploi@188.245.170.184"
+alias ssh-openclaw="ssh claw@89.167.111.23"
+alias oc="ssh-openclaw"
+
 
 # Brew
 alias bi="brew info"

@@ -17,7 +17,7 @@ spoon.LeftRightHotkey:bind({"rCmd"}, "j", function()
 end)
 
 spoon.LeftRightHotkey:bind({"rCmd"}, "k", function()
-    hs.application.launchOrFocus("Visual Studio Code")
+    hs.application.launchOrFocus("Codex")
 end)
 
 spoon.LeftRightHotkey:bind({"rCmd"}, "l", function()
