@@ -13,15 +13,15 @@ brew 'gh'
 brew 'git'
 brew 'grep'
 brew 'httpie'
-brew 'mackup'
 brew 'duti'
 brew 'mas'
 brew 'pkg-config' # https://github.com/driesvints/dotfiles/issues/20
 brew 'pyenv'
 brew 'pipenv'
-brew 'svn'
 brew 'speedtest'
 brew 'brewi'
+brew 'caddy'
+brew 'syncthing'
 
 # Development
 brew 'mysql'
@@ -30,7 +30,6 @@ brew 'python'
 
 # Apps
 cask '1password'
-cask 'alfred'
 cask 'discord'
 cask 'firefox'
 cask 'github'
@@ -38,8 +37,12 @@ cask 'google-chrome'
 cask 'herd'
 cask 'imageoptim'
 cask 'karabiner-elements'
+cask 'ghostty'
 cask 'raycast'
 cask 'the-unarchiver'
+cask 'claude-code'
+cask 'codex'
+cask 't3-chat'
 cask 'zed'
 
 # Fonts

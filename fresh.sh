@@ -30,13 +30,6 @@ brew bundle --file ./Brewfile
 # Create a projects directories
 mkdir $HOME/Sites
 mkdir $HOME/Projects
-mkdir $HOME/Projects/wordproof
-
-# Clone Github repositories
-./clone.sh
-
-# Symlink the Mackup config file to the home directory
-ln -s ./.mackup.cfg $HOME/.mackup.cfg
 
 # Symlink Karabiner complex modifications into the expected config directory
 mkdir -p $HOME/.config/karabiner/assets/complex_modifications

@@ -388,6 +388,16 @@ tell application "Finder"
         close w
     end repeat
 
+    set columnViewFolders to {folder "Projects" of home}
+    repeat with f in columnViewFolders
+        open f
+        delay 1
+        set w to front window
+        set current view of w to column view
+        delay 1
+        close w
+    end repeat
+
     set iCloudDrive to folder ((POSIX file (POSIX path of (path to home folder) & "Library/Mobile Documents/com~apple~CloudDocs")) as alias)
     open iCloudDrive
     delay 1
@@ -440,6 +450,10 @@ duti -s dev.zed.Zed .editorconfig all
 duti -s dev.zed.Zed .log all
 duti -s dev.zed.Zed .vue all
 duti -s dev.zed.Zed .svelte all
+
+# Set Ghostty as default for terminal-runnable files
+duti -s com.mitchellh.ghostty public.unix-executable all
+duti -s com.mitchellh.ghostty .command all
 
 ###############################################################################
 # Dock, Dashboard, and hot corners                                            #

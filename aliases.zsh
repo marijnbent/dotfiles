@@ -15,7 +15,7 @@ alias dot="cd $DOTFILES"
 alias p="cd $HOME/Projects"
 alias pc="cd $HOME/Clones"
 alias icloud="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/"
-alias notes="cd ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Notes"
+alias nt="cd ~/Notes"
 
 # Laravel
 alias a="php artisan"
@@ -52,12 +52,68 @@ alias oc="ssh-openclaw"
 alias bi="brew info"
 alias bs="brew search"
 alias ba="brew install"
-alias bac="brew --cask install"
+alias bac="brew install --cask"
 
 alias mysql="/opt/homebrew/opt/mysql@8.4/bin/mysql -u root"
 
+# Git
+alias gs='git status'
+alias ga='git add -A'
+alias gc='git commit -m'
+alias gp='git push'
+alias gpl='git pull'
+alias gco='git checkout'
+alias gb='git branch'
+alias gho='gh repo view --web'
+
+# Auto-generate commit message with Claude, commit and push
+# Supports monorepos: commits nested repos first, then root
+unalias gg 2>/dev/null
+function gg {
+  local root
+  root=$(git rev-parse --show-toplevel 2>/dev/null) || { echo "Not a git repo"; return 1; }
+
+  local -a committed_msgs
+
+  _gg_commit_repo() {
+    local dir=$1 push=$2
+    local name
+    name=$(basename "$dir")
+    cd "$dir" || return
+    git add -A
+    [[ -z $(git diff --staged) ]] && return
+    local msg
+    msg=$(git diff --staged | claude -p "Write a concise single-line git commit message for these changes. Output only the message, no quotes or explanation.")
+    git commit -q -m "$msg"
+    local hash
+    hash=$(git rev-parse --short HEAD)
+    committed_msgs+=("$name  $hash  $msg")
+    [[ $push == 1 ]] && git push -q
+    cd "$root"
+  }
+
+  # Commit any nested repos first (no push)
+  while IFS= read -r gitdir; do
+    local nested
+    nested=$(dirname "$gitdir")
+    [[ "$nested" != "$root" ]] && _gg_commit_repo "$nested" 0
+  done < <(find "$root" -name ".git" -type d -not -path "$root/.git")
+
+  # Commit and push root
+  _gg_commit_repo "$root" 1
+
+  unfunction _gg_commit_repo 2>/dev/null
+
+  if (( ${#committed_msgs[@]} > 0 )); then
+    echo ""
+    for m in "${committed_msgs[@]}"; do echo "  ✓ $m"; done
+  else
+    echo "  nothing to commit"
+  fi
+}
+
 # Zed editor
-alias zed='/Applications/Zed.app/Contents/MacOS/cli'
+alias zed='/Applications/Zed.app/Contents/MacOS/cli -n'
 
 # File Operations
 copy() { cat "$1" | pbcopy; }
