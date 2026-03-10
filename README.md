@@ -55,6 +55,19 @@ Check out the [`Brewfile`](./Brewfile) file and adjust the apps you want to inst
 
 Check out the [`aliases.zsh`](./aliases.zsh) file and add your own aliases. If you need to tweak your `$PATH` check out the [`path.zsh`](./path.zsh) file. These files get loaded in because the `$ZSH_CUSTOM` setting points to the `.dotfiles` directory. You can adjust the [`.zshrc`](./.zshrc) file to your liking to tweak your Oh My Zsh setup. More info about how to customize Oh My Zsh can be found [here](https://github.com/robbyrussell/oh-my-zsh/wiki/Customization).
 
+### Keyboard remaps
+
+Hyper is handled through Karabiner-Elements. This repo includes a complex-modifications file at [`karabiner/assets/complex_modifications/capslock-hyper.json`](./karabiner/assets/complex_modifications/capslock-hyper.json) that:
+
+- maps `Caps Lock` to `Hyper` (`left_command` + `left_control` + `left_option` + `left_shift`)
+- maps the `section/plus-minus` key to `Caps Lock`
+
+`fresh.sh` symlinks that file into `~/.config/karabiner/assets/complex_modifications/`, so it shows up in Karabiner-Elements under `Complex Modifications` -> `Add predefined rule`.
+
+If you want the Caps Lock light to stay off, disable `Manipulate caps lock LED` in Karabiner-Elements under `Devices` for the relevant keyboard. That LED setting is stored per device in `karabiner.json`, not in a complex-modifications rule.
+
+This config uses `non_us_backslash` for the `section/plus-minus` key. If your keyboard reports that key differently, confirm it with Karabiner-EventViewer and adjust the key code in the JSON.
+
 When installing these dotfiles for the first time you'll need to backup all of your settings with Mackup. Install Mackup and backup your settings with the commands below. Your settings will be synced to iCloud so you can use them to sync between computers and reinstall them when reinstalling your Mac. If you want to save your settings to a different directory or different storage than iCloud, [checkout the documentation](https://github.com/lra/mackup/blob/master/doc/README.md#storage). Also make sure your `.zshrc` file is symlinked from your dotfiles repo to your home directory. 
 
 ```zsh

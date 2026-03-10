@@ -326,7 +326,7 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 # /usr/libexec/PlistBuddy -c "Set DesktopViewSettings:IconViewSettings:labelOnBottom false" ~/Library/Preferences/com.apple.finder.plist
 
 # Enable snap-to-grid for icons on the desktop and in other icon views
-/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy dateAdded" ~/Library/Preferences/com.apple.finder.plist
 /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 
@@ -340,9 +340,9 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:iconSize 80" ~/Library/Preferences/com.apple.finder.plist
 /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:iconSize 80" ~/Library/Preferences/com.apple.finder.plist
 
-# Use list view in all Finder windows by default
-# Four-letter codes for the other view modes: `icnv`, `clmv`, `glyv`
-defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
+# Use column view (three-panel) in all Finder windows by default
+# Four-letter codes for other view modes: `icnv`, `Nlsv`, `glyv`
+defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
 
 # Disable the warning before emptying the Trash
 defaults write com.apple.finder WarnOnEmptyTrash -bool false
@@ -366,6 +366,66 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
     General -bool true \
     OpenWith -bool true \
     Privileges -bool true
+
+# Finder: Desktop and Downloads folders - list view, sorted by date (newest first)
+# Per-folder view settings require briefly opening each folder via AppleScript
+osascript << 'APPLESCRIPT'
+tell application "Finder"
+    set foldersToSet to {folder "Desktop" of home, folder "Downloads" of home}
+    repeat with f in foldersToSet
+        open f
+        tell front window
+            set current view to list view
+            set sort column to modification date column
+            set sort direction to descending
+        end tell
+        close front window
+    end repeat
+end tell
+APPLESCRIPT
+
+###############################################################################
+# Default Applications                                                        #
+###############################################################################
+
+# Set Zed as default editor for text and code files
+# Requires: brew install duti
+duti -s dev.zed.Zed public.plain-text all
+duti -s dev.zed.Zed public.source-code all
+duti -s dev.zed.Zed public.shell-script all
+duti -s dev.zed.Zed net.daringfireball.markdown all
+duti -s dev.zed.Zed public.json all
+duti -s dev.zed.Zed public.xml all
+duti -s dev.zed.Zed .md all
+duti -s dev.zed.Zed .txt all
+duti -s dev.zed.Zed .js all
+duti -s dev.zed.Zed .ts all
+duti -s dev.zed.Zed .jsx all
+duti -s dev.zed.Zed .tsx all
+duti -s dev.zed.Zed .json all
+duti -s dev.zed.Zed .yaml all
+duti -s dev.zed.Zed .yml all
+duti -s dev.zed.Zed .toml all
+duti -s dev.zed.Zed .html all
+duti -s dev.zed.Zed .css all
+duti -s dev.zed.Zed .php all
+duti -s dev.zed.Zed .py all
+duti -s dev.zed.Zed .rb all
+duti -s dev.zed.Zed .go all
+duti -s dev.zed.Zed .rs all
+duti -s dev.zed.Zed .swift all
+duti -s dev.zed.Zed .sh all
+duti -s dev.zed.Zed .zsh all
+duti -s dev.zed.Zed .lua all
+duti -s dev.zed.Zed .conf all
+duti -s dev.zed.Zed .ini all
+duti -s dev.zed.Zed .env all
+duti -s dev.zed.Zed .gitignore all
+duti -s dev.zed.Zed .gitconfig all
+duti -s dev.zed.Zed .editorconfig all
+duti -s dev.zed.Zed .log all
+duti -s dev.zed.Zed .vue all
+duti -s dev.zed.Zed .svelte all
 
 ###############################################################################
 # Dock, Dashboard, and hot corners                                            #

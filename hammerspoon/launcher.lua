@@ -12,16 +12,16 @@ spoon.LeftRightHotkey:bind({"rCmd"}, "p", function()
     hs.application.launchOrFocus("1Password")
 end)
 
-spoon.LeftRightHotkey:bind({"rCmd"}, "j", function()
-    hs.application.launchOrFocus("Tiimo")
-end)
+-- spoon.LeftRightHotkey:bind({"rCmd"}, "j", function()
+--     hs.application.launchOrFocus("Tiimo")
+-- end)
 
 spoon.LeftRightHotkey:bind({"rCmd"}, "k", function()
     hs.application.launchOrFocus("Codex")
 end)
 
 spoon.LeftRightHotkey:bind({"rCmd"}, "l", function()
-    hs.application.launchOrFocus("/System/Volumes/Data/Users/marijn/Applications/Edge Apps.localized/AI Studio.app")
+    hs.application.launchOrFocus("T3 Code (Alpha)")
 end)
 
 -- spoon.LeftRightHotkey:bind({"rCmd"}, "n", function()

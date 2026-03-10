@@ -1,1 +1,3 @@
 -- We use Karabiner for this.
+-- Import ~/.dotfiles/karabiner/assets/complex_modifications/capslock-hyper.json
+-- in Karabiner-Elements > Complex Modifications.

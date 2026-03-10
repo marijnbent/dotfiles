@@ -1,13 +1,9 @@
 {
   "browser": {
     "browserName": "chromium",
-    "userDataDir": "/Users/marijn/Library/Application Support/Google/Chrome",
+    "userDataDir": "/Users/marijn/Library/Application Support/Playwright Chromium MCP",
     "launchOptions": {
-      "headless": false,
-      "executablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-      "args": [
-        "--profile-directory=Profile 2"
-      ]
+      "headless": false
     }
   }
 }

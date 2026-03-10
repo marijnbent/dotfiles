@@ -38,6 +38,11 @@ mkdir $HOME/Projects/wordproof
 # Symlink the Mackup config file to the home directory
 ln -s ./.mackup.cfg $HOME/.mackup.cfg
 
+# Symlink Karabiner complex modifications into the expected config directory
+mkdir -p $HOME/.config/karabiner/assets/complex_modifications
+ln -sf ~/.dotfiles/karabiner/assets/complex_modifications/capslock-hyper.json \
+  $HOME/.config/karabiner/assets/complex_modifications/capslock-hyper.json
+
 # Set macOS preferences - we will run this last because this will reload the shell
 source ./.macos
 
