@@ -371,16 +371,30 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 # Per-folder view settings require briefly opening each folder via AppleScript
 osascript << 'APPLESCRIPT'
 tell application "Finder"
-    set foldersToSet to {folder "Desktop" of home, folder "Downloads" of home}
-    repeat with f in foldersToSet
+    set dateDescFolders to {folder "Desktop" of home, folder "Downloads" of home}
+    repeat with f in dateDescFolders
         open f
-        tell front window
-            set current view to list view
-            set sort column to modification date column
-            set sort direction to descending
-        end tell
-        close front window
+        set w to front window
+        set current view of w to list view
+        set sort column of list view options of w to modification date column
+        close w
     end repeat
+
+    set nameAscFolders to {folder "Applications" of startup disk}
+    repeat with f in nameAscFolders
+        open f
+        set w to front window
+        set current view of w to list view
+        close w
+    end repeat
+
+    set iCloudDrive to folder ((POSIX file (POSIX path of (path to home folder) & "Library/Mobile Documents/com~apple~CloudDocs")) as alias)
+    open iCloudDrive
+    delay 1
+    set w to front window
+    set current view of w to column view
+    delay 1
+    close w
 end tell
 APPLESCRIPT
 
