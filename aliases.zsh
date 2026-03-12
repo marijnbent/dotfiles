@@ -24,7 +24,8 @@ alias ar="php artisan migrate:rollback"
 
 #AI
 alias cl="claude --dangerously-skip-permissions"
-alias co="codex"
+alias co='codex --yolo -c "service_tier=flex" -c "model_reasoning_effort=high"'
+alias cof='codex --yolo -c "service_tier=flex" -c "model_reasoning_effort=low"'
 alias op="opencode"
 alias ag="cd $DOTFILES/agents"
 
@@ -92,15 +93,13 @@ function gg {
     cd "$root"
   }
 
-  # Commit any nested repos first (no push)
-  while IFS= read -r gitdir; do
-    local nested
-    nested=$(dirname "$gitdir")
-    [[ "$nested" != "$root" ]] && _gg_commit_repo "$nested" 0
-  done < <(find "$root" -name ".git" -type d -not -path "$root/.git")
+  # Commit any submodules first
+  while IFS= read -r nested; do
+    _gg_commit_repo "$nested" ${1:-0}
+  done < <(git -C "$root" submodule foreach --recursive --quiet 'echo "$toplevel/$sm_path"' 2>/dev/null)
 
-  # Commit and push root
-  _gg_commit_repo "$root" 1
+  # Commit root (push if requested)
+  _gg_commit_repo "$root" ${1:-0}
 
   unfunction _gg_commit_repo 2>/dev/null
 
@@ -112,8 +111,10 @@ function gg {
   fi
 }
 
+function ggg { gg 1 }
+
 # Zed editor
-alias zed='/Applications/Zed.app/Contents/MacOS/cli -n'
+alias zed='/Applications/Zed.app/Contents/MacOS/cli -n --wait'
 
 # File Operations
 copy() { cat "$1" | pbcopy; }

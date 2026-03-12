@@ -13,7 +13,6 @@ spoon.LeftRightHotkey:bind({"rCmd"}, "p", function()
 end)
 
 -- spoon.LeftRightHotkey:bind({"rCmd"}, "j", function()
---     hs.application.launchOrFocus("Tiimo")
 -- end)
 
 spoon.LeftRightHotkey:bind({"rCmd"}, "k", function()

@@ -35,10 +35,11 @@ source <(fzf --zsh)
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='nano'
 else
-  export EDITOR='zed'
+  export EDITOR='zed --wait'
+  export VISUAL='zed --wait'
 fi
 
-ARTISAN_OPEN_ON_MAKE_EDITOR=code
+ARTISAN_OPEN_ON_MAKE_EDITOR=zed
 
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
