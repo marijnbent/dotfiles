@@ -25,7 +25,8 @@ alias ar="php artisan migrate:rollback"
 #AI
 alias cl="claude --dangerously-skip-permissions"
 alias co='codex --yolo -c "model_reasoning_effort=high"'
-alias cof='codex --yolo -c "model_reasoning_effort=low"'
+unalias c 2>/dev/null
+alias c='codex --yolo -c "model_reasoning_effort=low"'
 alias op="opencode"
 alias ag="cd $DOTFILES/agents"
 
@@ -69,15 +70,15 @@ alias gho='gh repo view --web'
 
 # Auto-generate commit message with Claude, commit and push
 # Supports monorepos: commits nested repos first, then root
-unalias gg 2>/dev/null
-function gg {
+unalias g 2>/dev/null
+function g {
   local root scan_root is_git_root
   local -a repo_targets
   local -a committed_msgs
   local -a pushed_msgs
   local -a push_notes
 
-  _gg_push_repo() {
+  _g_push_repo() {
     local dir=$1
     local prev_dir=$PWD
     local name upstream ahead_count hash dry_run
@@ -112,7 +113,7 @@ function gg {
     cd "$prev_dir" || return
   }
 
-  _gg_commit_repo() {
+  _g_commit_repo() {
     local dir=$1 push=$2
     local prev_dir=$PWD
     local name
@@ -164,12 +165,12 @@ $(git diff --staged)" >/dev/null 2>&1
   fi
 
   for nested in "${repo_targets[@]}"; do
-    _gg_commit_repo "$nested" ${1:-0}
-    [[ ${1:-0} == 1 ]] && _gg_push_repo "$nested"
+    _g_commit_repo "$nested" ${1:-0}
+    [[ ${1:-0} == 1 ]] && _g_push_repo "$nested"
   done
 
-  unfunction _gg_push_repo 2>/dev/null
-  unfunction _gg_commit_repo 2>/dev/null
+  unfunction _g_push_repo 2>/dev/null
+  unfunction _g_commit_repo 2>/dev/null
 
   if (( ${#committed_msgs[@]} > 0 || ${#pushed_msgs[@]} > 0 || ${#push_notes[@]} > 0 )); then
     echo ""
@@ -193,7 +194,8 @@ $(git diff --staged)" >/dev/null 2>&1
   fi
 }
 
-function ggg { gg 1 }
+unalias gg 2>/dev/null
+function gg { g 1 }
 
 # Zed editor
 alias zed='/Applications/Zed.app/Contents/MacOS/cli -n --wait'
