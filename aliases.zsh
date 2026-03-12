@@ -24,8 +24,8 @@ alias ar="php artisan migrate:rollback"
 
 #AI
 alias cl="claude --dangerously-skip-permissions"
-alias co='codex --yolo -c "service_tier=flex" -c "model_reasoning_effort=high"'
-alias cof='codex --yolo -c "service_tier=flex" -c "model_reasoning_effort=low"'
+alias co='codex --yolo -c "model_reasoning_effort=high"'
+alias cof='codex --yolo -c "model_reasoning_effort=low"'
 alias op="opencode"
 alias ag="cd $DOTFILES/agents"
 
@@ -84,7 +84,14 @@ function gg {
     git add -A
     [[ -z $(git diff --staged) ]] && return
     local msg
-    msg=$(git diff --staged | claude -p "Write a concise single-line git commit message for these changes. Output only the message, no quotes or explanation.")
+    local _tmp
+    _tmp=$(mktemp)
+    codex exec --ephemeral -c "model_reasoning_effort=low" --color never -o "$_tmp" \
+      "Write a concise single-line git commit message for these changes. Output only the message, no quotes or explanation.
+
+$(git diff --staged)" >/dev/null 2>&1
+    msg=$(cat "$_tmp")
+    rm -f "$_tmp"
     git commit -q -m "$msg"
     local hash
     hash=$(git rev-parse --short HEAD)
