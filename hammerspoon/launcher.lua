@@ -1,7 +1,7 @@
 print('🥁 Launcher loaded')
 
 spoon.LeftRightHotkey:bind({"rCmd"}, "i", function()
-    hs.application.launchOrFocus("Ghostty")
+    hs.application.launchOrFocus("cmux")
 end)
 
 spoon.LeftRightHotkey:bind({"rCmd"}, "o", function()

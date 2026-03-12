@@ -198,5 +198,8 @@ function ggg { gg 1 }
 # Zed editor
 alias zed='/Applications/Zed.app/Contents/MacOS/cli -n --wait'
 
+# VS Code
+alias code='code -n --wait'
+
 # File Operations
 copy() { cat "$1" | pbcopy; }
