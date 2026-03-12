@@ -71,18 +71,58 @@ alias gho='gh repo view --web'
 # Supports monorepos: commits nested repos first, then root
 unalias gg 2>/dev/null
 function gg {
-  local root
-  root=$(git rev-parse --show-toplevel 2>/dev/null) || { echo "Not a git repo"; return 1; }
-
+  local root scan_root is_git_root
+  local -a repo_targets
   local -a committed_msgs
+  local -a pushed_msgs
+  local -a push_notes
+
+  _gg_push_repo() {
+    local dir=$1
+    local prev_dir=$PWD
+    local name upstream ahead_count hash dry_run
+    name=$(basename "$dir")
+    cd "$dir" || return
+
+    dry_run=$(git push --dry-run --porcelain 2>/dev/null)
+    if [[ $? -ne 0 ]]; then
+      push_notes+=("$name  no configured push destination")
+      cd "$prev_dir" || return
+      return
+    fi
+
+    if [[ $dry_run == *$'\t[up to date]'* ]]; then
+      cd "$prev_dir" || return
+      return
+    fi
+
+    if upstream=$(git rev-parse --abbrev-ref --symbolic-full-name '@{upstream}' 2>/dev/null); then
+      ahead_count=$(git rev-list --count "${upstream}..HEAD" 2>/dev/null)
+    else
+      ahead_count=""
+    fi
+
+    git push -q
+    hash=$(git rev-parse --short HEAD)
+    if [[ -n $ahead_count && $ahead_count -gt 0 ]]; then
+      pushed_msgs+=("$name  $hash  pushed $ahead_count commit(s)")
+    else
+      pushed_msgs+=("$name  $hash  pushed existing commits")
+    fi
+    cd "$prev_dir" || return
+  }
 
   _gg_commit_repo() {
     local dir=$1 push=$2
+    local prev_dir=$PWD
     local name
     name=$(basename "$dir")
     cd "$dir" || return
     git add -A
-    [[ -z $(git diff --staged) ]] && return
+    if git diff --staged --quiet; then
+      cd "$prev_dir" || return
+      return
+    fi
     local msg
     local _tmp
     _tmp=$(mktemp)
@@ -97,24 +137,59 @@ $(git diff --staged)" >/dev/null 2>&1
     hash=$(git rev-parse --short HEAD)
     committed_msgs+=("$name  $hash  $msg")
     [[ $push == 1 ]] && git push -q
-    cd "$root"
+    cd "$prev_dir" || return
   }
 
-  # Commit any submodules first
-  while IFS= read -r nested; do
+  if root=$(git rev-parse --show-toplevel 2>/dev/null); then
+    is_git_root=1
+
+    # Commit any submodules first
+    while IFS= read -r nested; do
+      [[ -n $nested ]] && repo_targets+=("$nested")
+    done < <(git -C "$root" submodule foreach --recursive --quiet 'echo "$toplevel/$sm_path"' 2>/dev/null)
+
+    # Commit root last so parent repos can record updated submodule pointers.
+    repo_targets+=("$root")
+  else
+    is_git_root=0
+    scan_root=$PWD
+    while IFS= read -r nested; do
+      [[ -n $nested ]] && repo_targets+=("$nested")
+    done < <(find -L "$scan_root" -mindepth 2 \( -type d -name .git -prune -print -o -type f -name .git -print \) 2>/dev/null | while IFS= read -r git_entry; do dirname "$git_entry"; done | sort -u)
+
+    if (( ${#repo_targets[@]} == 0 )); then
+      echo "Not a git repo and no nested git repos found"
+      return 1
+    fi
+  fi
+
+  for nested in "${repo_targets[@]}"; do
     _gg_commit_repo "$nested" ${1:-0}
-  done < <(git -C "$root" submodule foreach --recursive --quiet 'echo "$toplevel/$sm_path"' 2>/dev/null)
+    [[ ${1:-0} == 1 ]] && _gg_push_repo "$nested"
+  done
 
-  # Commit root (push if requested)
-  _gg_commit_repo "$root" ${1:-0}
-
+  unfunction _gg_push_repo 2>/dev/null
   unfunction _gg_commit_repo 2>/dev/null
 
-  if (( ${#committed_msgs[@]} > 0 )); then
+  if (( ${#committed_msgs[@]} > 0 || ${#pushed_msgs[@]} > 0 || ${#push_notes[@]} > 0 )); then
     echo ""
     for m in "${committed_msgs[@]}"; do echo "  ✓ $m"; done
+    for m in "${pushed_msgs[@]}"; do echo "  ↑ $m"; done
+    for m in "${push_notes[@]}"; do echo "  ! $m"; done
   else
-    echo "  nothing to commit"
+    if [[ $is_git_root == 1 ]]; then
+      if [[ ${1:-0} == 1 ]]; then
+        echo "  nothing to commit or push"
+      else
+        echo "  nothing to commit"
+      fi
+    else
+      if [[ ${1:-0} == 1 ]]; then
+        echo "  no changes or outgoing commits found in nested git repos"
+      else
+        echo "  no changes found in nested git repos"
+      fi
+    fi
   fi
 }
 
