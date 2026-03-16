@@ -1,37 +1,33 @@
-# Path to your dotfiles.
 export DOTFILES=$HOME/.dotfiles
 
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-
+# oh-my-zsh settings (read by use-omz)
 ZSH_THEME="robbyrussell"
-
 HYPHEN_INSENSITIVE="true"
 COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 HIST_STAMPS="dd/mm/yyyy"
 
-zstyle ':omz:update' mode auto
+# shell config
+for _f in $DOTFILES/shell/*.zsh; do source "$_f"; done
+unset _f
 
-ZSH_CUSTOM=$DOTFILES
+# antidote
+source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
+antidote load $DOTFILES/.zsh_plugins.txt
 
-plugins=(artisan brew git zsh-autosuggestions zsh-autocomplete zsh-syntax-highlighting)
-
-source $ZSH/oh-my-zsh.sh
-
-# History
+# history
 HISTSIZE=50000
 SAVEHIST=50000
 setopt HIST_IGNORE_SPACE
 setopt HIST_IGNORE_ALL_DUPS
 
-# Navigation
+# navigation
 setopt AUTO_CD
 
 # fzf
 source <(fzf --zsh)
 
-# Preferred editor
+# editor
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='nano'
 else

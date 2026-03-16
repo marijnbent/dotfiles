@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cold Outreach Sequence"
+  short_description: "Draft researched LinkedIn and email outreach sequences."
+  default_prompt: "Use this skill when building personalized cold outreach sequences for prospects on LinkedIn or email, including research, follow-ups, and pipeline tracking."

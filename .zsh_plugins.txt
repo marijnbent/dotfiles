@@ -1,0 +1,16 @@
+# completions
+mattmc3/ez-compinit
+zsh-users/zsh-completions kind:fpath path:src
+
+# oh-my-zsh
+getantidote/use-omz
+ohmyzsh/ohmyzsh path:lib
+ohmyzsh/ohmyzsh path:themes/robbyrussell.zsh-theme
+ohmyzsh/ohmyzsh path:plugins/brew
+ohmyzsh/ohmyzsh path:plugins/git
+
+# plugins
+jessarcher/zsh-artisan
+zsh-users/zsh-autosuggestions
+marlonrichert/zsh-autocomplete
+zsh-users/zsh-syntax-highlighting

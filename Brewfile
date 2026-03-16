@@ -22,6 +22,7 @@ brew 'speedtest'
 brew 'brewi'
 brew 'caddy'
 brew 'syncthing'
+brew 'antidote'
 
 # Development
 brew 'mysql'

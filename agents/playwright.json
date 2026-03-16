@@ -1,9 +1,0 @@
-{
-  "browser": {
-    "browserName": "chromium",
-    "userDataDir": "/Users/marijn/Library/Application Support/Playwright Chromium MCP",
-    "launchOptions": {
-      "headless": false
-    }
-  }
-}

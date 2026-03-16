@@ -1,0 +1,4 @@
+interface:
+  display_name: "Beter Nederlands"
+  short_description: "Schrijf helder en professioneel Nederlands."
+  default_prompt: "Use $beter-nederlands to write or revise this Dutch text so it is clear, concise, professional, and consistent."
