@@ -11,6 +11,7 @@ alias '...'="cd ../.."
 alias speed='speedtest'
 
 # Directories
+alias z="cd ~"
 alias dot="cd $DOTFILES"
 alias p="cd $HOME/Projects"
 alias b="cd $HOME/Business"
@@ -107,6 +108,7 @@ alias ssh-hetzner-gorgeous-flower="ssh ploi@128.140.5.136"
 alias ssh-hetzner-blushing-storm="ssh ploi@188.245.170.184"
 alias ssh-openclaw="ssh claw@89.167.111.23"
 alias oc="ssh-openclaw"
+alias server-bootstrap="$DOTFILES/scripts/server-bootstrap.sh"
 
 # Brew
 alias bi="brew info"
