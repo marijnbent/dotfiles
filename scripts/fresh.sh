@@ -34,10 +34,8 @@ ln -sf ~/.dotfiles/config/hammerspoon ~/.hammerspoon
 mkdir -p ~/.config/ghostty
 ln -sf ~/.dotfiles/config/ghostty.conf ~/.config/ghostty/config
 
-# Karabiner
-mkdir -p $HOME/.config/karabiner/assets/complex_modifications
-ln -sf ~/.dotfiles/config/karabiner/assets/complex_modifications/capslock-hyper.json \
-  $HOME/.config/karabiner/assets/complex_modifications/capslock-hyper.json
+# Karabiner (symlink the whole directory — symlinking just the file breaks hot-reload)
+ln -sf ~/.dotfiles/config/karabiner ~/.config/karabiner
 
 # Notes sync LaunchAgent
 ln -sf "$HOME/.dotfiles/launch-agents/com.marijn.notes-sync.plist" \

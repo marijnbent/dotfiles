@@ -24,7 +24,14 @@ alias reloadshell='exec zsh'
 alias ll='ls -AhlF --color=auto --group-directories-first'
 alias ..='cd ..'
 alias ...='cd ../..'
+alias z='cd ~'
 alias py='python3'
+
+# AI
+alias cl='claude --dangerously-skip-permissions'
+alias co='codex --yolo -c "model_reasoning_effort=high"'
+unalias c 2>/dev/null
+alias c='codex --yolo -c "model_reasoning_effort=low"'
 
 # Git
 alias gs='git status'
