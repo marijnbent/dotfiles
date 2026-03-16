@@ -1,4 +1,4 @@
 require("hs.ipc")
-package.path = package.path .. ";" .. os.getenv("HOME") .. "/.dotfiles/hammerspoon/?.lua"
+package.path = package.path .. ";" .. hs.configdir .. "/?.lua"
 
 require("main")

@@ -7,13 +7,13 @@ COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 HIST_STAMPS="dd/mm/yyyy"
 
-# shell config
-for _f in $DOTFILES/shell/*.zsh; do source "$_f"; done
-unset _f
-
 # antidote
 source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
 antidote load $DOTFILES/.zsh_plugins.txt
+
+# shell config
+for _f in $DOTFILES/shell/*.zsh; do source "$_f"; done
+unset _f
 
 # history
 HISTSIZE=50000

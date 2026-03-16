@@ -1,3 +1,6 @@
+# Load user-local CLIs first
+export PATH="$HOME/.local/bin:$PATH"
+
 # Load dotfiles binaries
 export PATH="$DOTFILES/bin:$PATH"
 
@@ -16,4 +19,3 @@ export PATH="node_modules/.bin:vendor/bin:$PATH"
 #export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 
 export PATH="/Users/marijn/Library/Application Support/Herd/bin:$PATH"
-
